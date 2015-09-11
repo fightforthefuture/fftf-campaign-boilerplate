@@ -1,0 +1,18 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    {% include meta.html %}
+</head>
+<body>
+
+    {{ content }}
+
+    <!-- optionally add any markdown text to be included in footer at L12 -->
+    {% capture additionalFooter %}
+    {% endcapture %}
+    <!-- delete one of these footers -->
+    {% include fftf-footer.html %}
+    {% include fftfef-footer.html %}
+{% include scripts.html %}
+</body>
+</html>

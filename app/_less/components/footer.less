@@ -1,0 +1,55 @@
+#fftf-footer, #fftfef-footer {
+    font-size: 1.4rem;
+    padding: 2rem 1rem;
+    text-align: center;
+
+    @media screen and (min-width: @small-phone) {
+        padding: 2rem 1rem;
+    }
+    @media screen and (min-width: @large-tablet) {
+        padding: 2rem;
+    }
+
+    a {
+        &:link, &:visited, &:hover, &:active, &:focus {
+            text-decoration: none;
+        }
+    }
+    dl {
+        align-items: center;
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+        max-width: 310px;
+    }
+    dt {
+        margin-right: 1rem;
+        text-align: right;
+    }
+    dd {
+        flex-grow: 2;
+        text-align: left;
+    }
+}
+
+#fftf-footer {
+    background-color: @blueBlack;
+    color: @white;
+
+    a {
+        &:link, &:visited, &:hover, &:active, &:focus {
+            color: @white;
+        }
+    }
+}
+
+#fftfef-footer {
+    background-color: lighten(@white, 2%);
+    background-image: url('/images/fftfef-bg.gif');
+    color: lighten(@black, 20%);
+    a {
+        &:link, &:visited, &:hover, &:active, &:focus {
+            color: lighten(@black, 20%);
+        }
+    }
+}

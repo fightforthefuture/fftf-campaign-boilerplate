@@ -1,0 +1,41 @@
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    font-size: 62.5%;
+    height: 100%;
+}
+
+body {
+    font-size: 1.6rem;
+    font-family: @body-font;
+    position: relative;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: @heading-font;
+}
+
+h1 {
+    font-size: 26vw;
+    line-height: 0.8;
+
+    @media screen and (min-width: @small-phone) {
+        font-size: 10.56rem;
+        line-height: 0.82;
+    }
+
+}
+
+h2 {
+    font-size: 17vw;
+    @media screen and (min-width: @small-phone) {
+        font-size: 8rem;
+    }
+}
+
+img {
+    height: auto;
+    max-width: 100%;
+}
