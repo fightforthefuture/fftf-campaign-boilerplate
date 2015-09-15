@@ -1,17 +1,8 @@
 {
   "name": "fftf-campaign-boostrap",
   "version": "0.0.0",
-  "description": "",
-  "scripts": {
-    "postinstall": "bundle",
-    "start": "grunt",
-    "verbose": "grunt dev -vvv",
-    "build": "grunt build",
-    "deploy": "./deploy-ghpages.sh"
-  },
-  "repository": {
-    "type": "git"
-  },
+  "license": "GPL-3.0",
+  "description": "A quick-start microsite generator for Fight for the Future campaigns.",
   "author": [
     {
       "name": "Aki Rose",
@@ -19,7 +10,15 @@
       "url": "https://github.com/gesa/"
     }
   ],
-  "license": "BSD",
+  "private" : "true",
+  "repository": "gesa/fftf-campaign-boilerplate",
+  "scripts": {
+    "postinstall": "bundle",
+    "start": "grunt",
+    "verbose": "grunt dev -vvv",
+    "build": "grunt build",
+    "deploy": "./deploy-ghpages.sh"
+  },
   "dependencies": {},
   "devDependencies": {
     "autoprefixer": "^6.0.0",
