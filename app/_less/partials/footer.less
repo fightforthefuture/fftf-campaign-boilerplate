@@ -12,14 +12,19 @@
 
     a {
         &:link, &:visited, &:hover, &:active, &:focus {
+            font-weight: 600;
             text-decoration: none;
+        }
+        &:hover, &:active, &:focus {
+            border-bottom: 0.1rem dotted lightgray;
         }
     }
     dl {
         align-items: center;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-around;
-        margin: 0 auto;
+        margin: 0 auto 1rem;
         max-width: 310px;
     }
     dt {
@@ -29,6 +34,9 @@
     dd {
         flex-grow: 2;
         text-align: left;
+    }
+    p {
+        margin-bottom: 1rem;
     }
 }
 
@@ -41,6 +49,9 @@
             color: @white;
         }
     }
+    img {
+        margin-top: 1rem;
+    }
 }
 
 #fftfef-footer {
@@ -52,4 +63,9 @@
             color: lighten(@black, 20%);
         }
     }
+}
+
+.footer-logo {
+    display: block;
+    margin: 0 auto;
 }
