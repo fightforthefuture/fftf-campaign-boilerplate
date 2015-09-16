@@ -5,4 +5,5 @@ description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do e
 
 ---
 
-🎉 Content goes here ^_^ 🎉
+> %copy%
+> 🎉 Content goes here ^_^ 🎉
