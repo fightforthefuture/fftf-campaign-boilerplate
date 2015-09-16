@@ -164,9 +164,8 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: [
-                            'https://mothership-js.herokuapp.com/core.js',
                             '<%= site.app %>/_js/controllers/**/*.js',
-                            '<%= site.app %>/_js/models/*.js',
+                            '<%= site.app %>/_js/models/**/*.js',
                             '<%= site.app %>/_js/views/**/*.js',
                             '<%= site.app %>/_js/main.js'
                         ],
