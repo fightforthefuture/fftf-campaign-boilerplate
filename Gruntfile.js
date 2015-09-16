@@ -99,7 +99,7 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 hostname: '0.0.0.0',
-                livereload: 35728,
+                livereload: 35729,
                 port: 9051,
                 middleware: function (connect, options, middlewares) {
                     middlewares.unshift(function (request, response, next) {
@@ -164,6 +164,7 @@ module.exports = function (grunt) {
                 files: [
                     {
                         src: [
+                            'https://mothership-js.herokuapp.com/core.js',
                             '<%= site.app %>/_js/controllers/**/*.js',
                             '<%= site.app %>/_js/models/*.js',
                             '<%= site.app %>/_js/views/**/*.js',
