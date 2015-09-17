@@ -99,7 +99,6 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 hostname: '0.0.0.0',
-                livereload: 35729,
                 port: 9051,
                 middleware: function (connect, options, middlewares) {
                     middlewares.unshift(function (request, response, next) {
@@ -110,12 +109,6 @@ module.exports = function (grunt) {
                     return middlewares;
                 },
                 useAvailablePort: true
-            },
-            livereload: {
-                options: {
-                    base: '<%= site.dist %>',
-                    open: true
-                }
             }
         },
 
@@ -144,14 +137,6 @@ module.exports = function (grunt) {
                     '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,txt}'
                 ],
                 tasks: ['jekyll:server', 'concurrent']
-            },
-            livereload: {
-                options: {
-                    livereload: '<%= connect.options.livereload %>'
-                },
-                files: [
-                    '<%= site.dist %>/**/*.*'
-                ]
             }
         },
 
@@ -201,7 +186,6 @@ module.exports = function (grunt) {
         'clean:server',
         'jekyll:server',
         'concurrent:server',
-        'connect:livereload',
         'watch'
     ]);
 
