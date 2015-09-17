@@ -99,7 +99,7 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 hostname: '0.0.0.0',
-                port: 9051,
+                port: 9047,
                 middleware: function (connect, options, middlewares) {
                     middlewares.unshift(function (request, response, next) {
                         response.setHeader('Access-Control-Allow-Origin', '*');
@@ -112,8 +112,7 @@ module.exports = function (grunt) {
             },
             local: {
                 options: {
-                    base: '<%= site.dist %>',
-                    open: true
+                    base: '<%= site.dist %>'
                 }
             }
         },
@@ -195,6 +194,14 @@ module.exports = function (grunt) {
         'jekyll:server',
         'concurrent:server',
         'connect:local',
+        'watch'
+    ]);
+
+    grunt.registerTask('server', [
+        'clean:server',
+        'jekyll:server',
+        'concurrent:server',
+        'connect',
         'watch'
     ]);
 
