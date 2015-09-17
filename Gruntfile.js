@@ -109,6 +109,12 @@ module.exports = function (grunt) {
                     return middlewares;
                 },
                 useAvailablePort: true
+            },
+            local: {
+                options: {
+                    base: '<%= site.dist %>',
+                    open: true
+                }
             }
         },
 
@@ -188,6 +194,7 @@ module.exports = function (grunt) {
         'clean:server',
         'jekyll:server',
         'concurrent:server',
+        'connect:local',
         'watch'
     ]);
 
