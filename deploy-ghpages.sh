@@ -1,9 +1,11 @@
 #!/bin/bash
 cd dist || exit 0;
 
-if  [ "$TRAVIS" = "true" -a "$TRAVIS_PULL_REQUEST" = "false" ]
+if  [ "$TRAVIS" = "true" -a "$TRAVIS_PULL_REQUEST" = "false"  -a "$TRAVIS_BRANCH" = "master" ]
   then
-    (git init
+    (
+
+    git init
      git config user.name "Travis-CI"
      git config user.email "travis@example.org"
      git add .
@@ -12,5 +14,5 @@ if  [ "$TRAVIS" = "true" -a "$TRAVIS_PULL_REQUEST" = "false" ]
     )
 fi
 
-# Move this to L6 once there's a CNAME file
+# Move this to L7 once there's a CNAME file
 # cp ../CNAME ./CNAME
