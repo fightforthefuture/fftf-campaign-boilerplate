@@ -1,8 +1,8 @@
 source "https://rubygems.org"
 
-gem 'jekyll', '~>2.3.0'
-gem 'rdiscount'
-gem 'csscss', '~>1.3'
-gem 'sass', '>=3.4.0'
+ruby "2.2.4"
 
-gem 'travis', '>=1.7.1'
+gem 'jekyll', '~> 3.1'
+gem 'kramdown'
+gem 'json', '1.8.3'
+gem 'travis', '>=1.8.2'

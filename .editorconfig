@@ -12,14 +12,10 @@ insert_final_newline = true
 
 # Universal indents
 indent_style = space
-indent_size = 4
+indent_size = 2 # I’M SO SORRY JEFF I COULDN’T TAKE IT ANYMORE
 
 # Javascript uniformity
 [*.js]
 curly_bracket_next_line = false
 spaces_around_operators = true
 spaces_around_brackets = both
-
-# except package.json
-[package.json]
-indent_size = 2

@@ -1,16 +1,12 @@
 # the Fight for the Future / Center for Rights campaign boilerplate
 
-## My troll-y writing pretties
-
-_i’m looking at you, charlie_
-
 **CAMPAIGN AND WRITING PEOPLE READ HERE PLEASE**
 
 - Generally, content is written in Markdown format. You can find documentation
 for this wonderful plain text formatting syntax all over:
     - [daringfireball][07], the source of markdown
     - [github][08]'s docs are super easy to follow
-    - [Discount][09] documents some extra features we have available to us
+    - [kramdown][09] documents some extra features we have available to us
 - Any content that is blog-post-like in nature can be found in `app/_posts`.
 - Any additional post should follow the naming convention
 `YYYY-MM-DD-post-title.md`
@@ -143,4 +139,4 @@ Cycle through markdown files in `_posts` directory
 
 [07]: http://daringfireball.net/projects/markdown/syntax
 [08]: https://help.github.com/articles/markdown-basics/
-[09]: http://www.pell.portland.or.us/~orc/Code/discount/#Language.extensions
+[09]: http://kramdown.gettalong.org/syntax.html

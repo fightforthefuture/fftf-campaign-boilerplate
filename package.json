@@ -13,10 +13,9 @@
   "private" : "true",
   "repository": "gesa/fftf-campaign-boilerplate",
   "scripts": {
+    "preinstall": "gem install bundler",
     "postinstall": "bundle",
     "start": "grunt",
-    "server":"grunt server",
-    "verbose": "grunt dev -vvv",
     "build": "grunt build",
     "deploy": "./deploy-ghpages.sh"
   },

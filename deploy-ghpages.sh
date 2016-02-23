@@ -4,7 +4,7 @@ cd dist || exit 0;
 if  [ "$TRAVIS" = "true" -a "$TRAVIS_PULL_REQUEST" = "false"  -a "$TRAVIS_BRANCH" = "master" ]
   then
     (
-
+    cp ../CNAME ./CNAME
     git init
      git config user.name "Travis-CI"
      git config user.email "travis@example.org"
@@ -13,6 +13,3 @@ if  [ "$TRAVIS" = "true" -a "$TRAVIS_PULL_REQUEST" = "false"  -a "$TRAVIS_BRANCH
      git push --force --quiet "https://${GH_TOKEN}@${GH_REF}" master:gh-pages > /dev/null 2>&1
     )
 fi
-
-# Move this to L7 once there's a CNAME file
-# cp ../CNAME ./CNAME

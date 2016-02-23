@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '0.10'
+- '4.1'
 sudo: false
 cache:
   bundler: true
@@ -8,10 +8,18 @@ cache:
   - node_modules
   - vendor
 before_install:
-  - gem install bundler
+  - rvm install `cat .ruby-version`
 install:
   - npm install
 script:
   - npm run build
 after_success:
-  - npm run deploy
+  - npm run-script deploy
+env:
+  - CXX=g++-4.8
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8

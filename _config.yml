@@ -10,10 +10,9 @@
 name: FORMAL CAMPAIGN NAME HERE
 url: CNAME OR GH PAGES URL HERE
 description: FORMAL CAMPAIGN DESCRIPTION HERE
-timezone: America/Los_Angeles # Should be formatted like formal tz database
-googleanalytics: UA-XXXXXXXX-XX
+timezone: America/New_York
+googleanalytics: UA-26576645-30
 
-favicon: '' # replace this with path to favicon if that’s a thing you’re doing.
 pathlead: '' # use this if you need a leading slash or directory on asset paths
 
 author:
@@ -33,15 +32,7 @@ permalink: /:title/ # See Jekyll documentation for permalink styles
 # Compiling #
 #############
 
-exclude: [
-  'img', 'css', 'fonts', '**.haml',
-  '**.png', '**.jpg', '**.jpeg', '**.gif', '**.webp', '**.svg', '**.ico',
-]
+exclude: ['img']
+keep_files: ['img', 'js', 'css']
 
-highlighter: pygments
-markdown: rdiscount
-rdiscount:
-  extensions:
-    - footnotes
-#    - autolink
-#    - smart
+markdown: kramdown
