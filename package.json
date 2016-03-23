@@ -10,7 +10,7 @@
       "url": "https://github.com/gesa/"
     }
   ],
-  "private" : "true",
+  "private": "true",
   "repository": "gesa/fftf-campaign-boilerplate",
   "scripts": {
     "preinstall": "gem install bundler",
@@ -38,6 +38,7 @@
     "grunt-jekyll": "^0.4.2",
     "grunt-postcss": "^0.6.0",
     "jit-grunt": "^0.9.1",
-    "time-grunt": "^1.1.0"
+    "time-grunt": "^1.1.0",
+    "uglify-save-license": "^0.4.1"
   }
 }
