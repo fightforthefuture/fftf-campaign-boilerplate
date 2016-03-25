@@ -21,12 +21,6 @@ module.exports = function (grunt) {
       }
     },
 
-    execute: {
-      generate_fp_token: {
-        src: ['generate_fp_token.js']
-      }
-    },
-
     jekyll: {
       options: {
         bundleExec: true,
@@ -186,7 +180,6 @@ module.exports = function (grunt) {
     concurrent: {
       tasks: [
         'copy:server',
-        'execute:generate_fp_token',
         'less:styles',
         'concat'
       ]
@@ -215,6 +208,4 @@ module.exports = function (grunt) {
   grunt.registerTask('default', [
     'dev'
   ]);
-
-  grunt.loadNpmTasks('grunt-execute');
 };
