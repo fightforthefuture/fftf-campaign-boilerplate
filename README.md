@@ -39,6 +39,21 @@ case you ever want two servers running at once.
 compiles those too.)
 - A browser window will open pointed to the local server! 🎉
 
+### Setting up Free Progress for social A/B testing
+
+Free Progress employs a domain security token mechanism to whitelist new domains
+automatically. This can be built into the deploy process for campaign sites.
+The build task stored in `generate_fp_token.js` creates a file called
+`dist/freeprogress.txt` which is a SHA256 hash of the Free Progress domain
+security token concatenated with the site's CNAME. In order for this to work,
+please do the following:
+
+- Rename the `env.example` to `.env` (this is file is ignored via .gitignore)
+- Edit the `FP_DOMAIN_SECURITY_TOKEN` export in `.env` to the correct value
+  stored in the Free Progress environment.
+- Load the `.env` file into your development environment (`source .env`)
+- Also add `FP_DOMAIN_SECURITY_TOKEN` as a hidden environment variable in Travis
+
 ### Deploying
 
 This boilerplate is set up to make travis autodeploys the easiest thing ever.

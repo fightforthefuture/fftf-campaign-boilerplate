@@ -35,9 +35,11 @@
     "grunt-contrib-less": "~0.11.4",
     "grunt-contrib-uglify": "^0.5.1",
     "grunt-contrib-watch": "~0.6.1",
+    "grunt-execute": "^0.2.2",
     "grunt-jekyll": "^0.4.2",
     "grunt-postcss": "^0.6.0",
     "jit-grunt": "^0.9.1",
+    "sha.js": "^2.4.5",
     "time-grunt": "^1.1.0",
     "uglify-save-license": "^0.4.1"
   }
