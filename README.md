@@ -1,4 +1,4 @@
-# the Fight for the Future / Center for Rights campaign boilerplate
+# the Fight for the Future / Center for Rights campaign boilerplate 
 
 **CAMPAIGN AND WRITING PEOPLE READ HERE PLEASE**
 
