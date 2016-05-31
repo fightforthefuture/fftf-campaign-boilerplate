@@ -1,6 +1,6 @@
 {
   "name": "fftf-campaign-boostrap",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "license": "GPL-3.0",
   "description": "A quick-start microsite generator for Fight for the Future campaigns.",
   "repo": "fightforthefuture/fftf-campaign-boilerplate",
