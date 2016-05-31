@@ -8,18 +8,34 @@ cache:
   - node_modules
   - vendor
 before_install:
-  - rvm install `cat .ruby-version`
+- rvm install `cat .ruby-version`
 install:
-  - npm install
+- npm install
 script:
-  - npm run build
+- npm run-script build
 after_success:
-  - npm run-script deploy
+- npm run-script deploy
 env:
-  - CXX=g++-4.8
+- CXX=g++-4.8 AWS_S3_BUCKET=s3.fightforthefuture.org
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+    - g++-4.8
+branches:
+  only:
+  - production
+#deploy:
+#  provider: s3
+#  access_key_id: AKIA1234567890ABCDEF
+#  secret_access_key:
+#    secure: foobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetcfoobarbazetcetcetc=
+#  bucket: s3.fightforthefuture.org
+#  local-dir: assets
+#  upload-dir: project-name
+#  skip_cleanup: true
+#  acl: public_read
+#  on:
+#    repo: fightforthefuture/fftf-campaign-boilerplate
+#    branch: production

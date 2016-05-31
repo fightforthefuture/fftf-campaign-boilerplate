@@ -1,25 +1,39 @@
+var Habitat = require('habitat');
+var saveLicense = require('uglify-save-license');
+
+Habitat.load('.env');
+
+var
+  env = new Habitat('', {
+    aws_s3_bucket: 's3.fightforthefuture.org'
+  });
+
 module.exports = function (grunt) {
+  "use strict";
+
   require('time-grunt')(grunt);
   require('jit-grunt')(grunt, {});
 
-  var saveLicense = require('uglify-save-license');
-
   grunt.initConfig({
-    site: {
-      app: 'app',
-      dist: 'dist'
+    meta :{
+      project: 'fftf-campaign-boilerplate',
+      port: '9000'
     },
 
-    clean: {
-      files: {
-        files: [
-          {
-            dot: true,
-            src: '<%= site.dist %>/*'
-          }
-        ]
-      }
+    site: {
+      app: 'site',
+      assets: 'assets',
+      dist: 'public',
+      javascript: [
+        'js/LICENSE',
+        'js/main.js'
+      ]
     },
+
+    clean: [
+      '<%= site.dist %>/*',
+      '<%= site.assets %>/*'
+    ],
 
     jekyll: {
       options: {
@@ -35,7 +49,7 @@ module.exports = function (grunt) {
       },
       server: {
         options: {
-          src: '<%= site.app %>'
+          incremental: true
         }
       },
       check: {
@@ -51,52 +65,178 @@ module.exports = function (grunt) {
           {
             expand: true,
             dot: true,
-            cwd: '<%= site.app %>',
-            src: [
-              'images/**/*'
-            ],
+            src: 'images/**/*.{gif,png,jpg,jpeg,svg}',
             dest: '<%= site.dist %>'
+          }
+        ]
+      },
+      deploy: {
+        files: [
+          {
+            expand: true,
+            dot: true,
+            src: 'images/**/*.{gif,png,jpg,svg}',
+            dest: '<%= site.assets %>'
           }
         ]
       }
     },
 
     less: {
-      styles: {
-        options: {
-          compress: false,
-          sourceMap: true
-        },
-        files: {
-          '<%= site.dist %>/css/core.css': '<%= site.app %>/_less/core.less'
-        }
+      options: {
+        compress: false,
+        sourceMap: true
       },
-    },
-
-    postcss: {
-      compile: {
-        options: {
-          map: true,
-          processors: [
-            require('autoprefixer')({browsers: 'last 2 versions'}),
-            require('cssnano')()
-          ]
-        },
+      server: {
         files: [
           {
             expand: true,
-            cwd: '<%= site.dist %>/css',
-            src: '**/*.css',
-            dest: '<%= site.dist %>/css'
+            cwd: 'less',
+            src: '*.less',
+            dest: '<%= site.dist %>/css',
+            ext: '.css'
+          }
+        ]
+      },
+      deploy: {
+        files: [
+          {
+            expand: true,
+            cwd: 'less',
+            src: '*.less',
+            dest: '<%= site.assets %>/css',
+            ext: '.css'
           }
         ]
       }
     },
 
+    postcss: {
+      options: {
+        map: {
+          prev: 'css/',
+          inline: false
+        },
+        processors: [
+          require('autoprefixer')({browsers: 'last 2 versions'}),
+          require('cssnano')()
+        ]
+      },
+      server: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= site.dist %>/css',
+            src: '*.css',
+            dest: '<%= site.dist %>/css'
+          }
+        ]
+      },
+      deploy: {
+        files: [
+          {
+            expand: true,
+            cwd: '<%= site.assets %>/css',
+            src: '*.css',
+            dest: '<%= site.assets %>/css'
+          }
+        ]
+      }
+    },
+
+    concat: {
+      options: {
+        sourceMap: true
+      },
+      server: {
+        files: [
+          {
+            src: '<%= site.javascript %>',
+            dest: '<%= site.dist %>/js/core.js'
+          }
+        ]
+      },
+      deploy: {
+        files: [
+          {
+            src: '<%= site.javascript %>',
+            dest: '<%= site.assets %>/js/core.js'
+          }
+        ]
+      }
+    },
+
+    uglify: {
+      options: {
+        sourceMap: true,
+        sourceMapIncludeSources: true,
+        check: 'gzip',
+        preserveComments: saveLicense
+      },
+      deploy: {
+        files: {
+          '<%= site.assets %>/js/core.js': '<%= site.assets %>/js/core.js'
+        }
+      }
+    },
+
+    cdnify: {
+      deploy: {
+        options: {
+          rewriter: function (url) {
+            var
+              stamp = Date.now();
+            if (url[0] === '/') {
+              return 'https://' + env.get('aws_s3_bucket') + '<%= meta.project %>' + url + '?' + stamp;
+            } else {
+              return url;
+            }
+          }
+        },
+        files: [{
+          expand: true,
+          cwd: '<%= site.dist %>',
+          src: '**/*.html',
+          dest: '<%= site.dist %>'
+        }, {
+          expand: true,
+          cwd: '<%= site.assets %>',
+          src: '**/*.css',
+          dest: '<%= site.assets %>'
+        }]
+      }
+    },
+
+    concurrent: {
+      server: [
+        'jekyll:server',
+        'less:server',
+        'concat:server',
+        'copy:server'
+      ],
+      review: [
+        'jekyll:review',
+        'less:server',
+        'concat:server',
+        'copy:server'
+      ],
+      deploy1: [
+        'jekyll:build',
+        'less:deploy',
+        'concat:deploy',
+        'copy:deploy'
+      ],
+      deploy2: [
+        'uglify:deploy',
+        'cdnify:deploy'
+      ]
+    },
+
     connect: {
       options: {
+        open: true,
         hostname: '0.0.0.0',
-        port: 9047,
+        port: '<%= meta.port %>',
         middleware: function (connect, options, middlewares) {
           middlewares.unshift(function (request, response, next) {
             response.setHeader('Access-Control-Allow-Origin', '*');
@@ -122,83 +262,45 @@ module.exports = function (grunt) {
         }
       },
       images: {
-        files: ['<%= site.app %>/images/**/*.*'],
+        files: ['images/**/*.*'],
         tasks: ['copy:server']
       },
       less: {
-        files: ['<%= site.app %>/_less/**/*.less'],
-        tasks: ['less:styles']
+        files: ['less/**/*.less'],
+        tasks: ['less:server', 'postcss:server']
       },
       javascript: {
-        files: ['<%= site.app %>/_js/**/*.js'],
-        tasks: ['concat']
+        files: ['js/**/*.js'],
+        tasks: ['concat:server']
       },
       jekyll: {
         files: [
           '_*.*',
-          '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,txt}'
+          '<%= site.app %>/**/*.{xml,html,yml,md,mkd,markdown,rb,txt}'
         ],
         tasks: ['jekyll:server']
       }
-    },
-
-    concat: {
-      options: {
-        sourceMap: true,
-        separator: grunt.util.linefeed + ';'
-      },
-      server: {
-        files: [
-          {
-            src: [
-              '<%= site.app %>/_js/LICENSE',
-              '<%= site.app %>/_js/controllers/**/*.js',
-              '<%= site.app %>/_js/models/**/*.js',
-              '<%= site.app %>/_js/views/**/*.js',
-              '<%= site.app %>/_js/main.js'
-            ],
-            dest: '<%= site.dist %>/js/core.js'
-          }
-        ]
-      }
-    },
-
-    uglify: {
-      options: {
-        sourceMap: true,
-        sourceMapIncludeSources: true,
-        check: 'gzip',
-        preserveComments: saveLicense
-      },
-      build: {
-        files: {
-          '<%= site.dist %>/js/core.js': '<%= site.dist %>/js/core.js'
-        }
-      }
-    },
-
-    concurrent: {
-      tasks: [
-        'copy:server',
-        'less:styles',
-        'concat'
-      ]
     }
   });
 
   grunt.registerTask('dev', [
-    'clean:files',
-    'jekyll:server',
-    'concurrent:tasks',
+    'clean',
+    'concurrent:server',
+    'postcss:server',
     'connect:local',
     'watch'
   ]);
 
   grunt.registerTask('build', [
-    'clean:files',
-    'jekyll:build',
-    'concurrent:tasks',
-    'postcss:compile'
+    'clean',
+    'concurrent:deploy1',
+    'concurrent:deploy2'
+  ]);
+
+  grunt.registerTask('review', [
+    'clean',
+    'concurrent:review',
+    'postcss:server'
   ]);
 
   grunt.registerTask('test', [

@@ -1,8 +1,7 @@
 source "https://rubygems.org"
 
-ruby "2.2.4"
+ruby "2.3.1"
 
-gem 'jekyll', '~> 3.1'
-gem 'kramdown'
+gem 'github-pages', group: :jekyll_plugins
 gem 'json', '1.8.3'
 gem 'travis', '>=1.8.2'

@@ -1,0 +1,54 @@
+{% if page.share_image %}
+  {% if page.share_image contains 'http' %}
+    {% assign share_img = page.share_image | uri_escape %}
+  {% else %}
+    {% capture share_img %}{{ site.url }}{{ page.share_image | uri_escape }}{% endcapture %}
+  {% endif %}
+{% else %}
+  {% capture share_img %}{{ site.url }}/img/share/fftf-share.jpg{% endcapture %}
+{% endif %}
+
+{% assign dims = page.share_image_dims | split: " × " %}
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<title>{{ page.title | default: site.name }}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+
+<!-- *** social meta *** -->
+<!-- facebook -->
+<meta property="og:url" content="{{ site.url }}{{ page.url }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="{{ share_img }}"/>
+<meta property="og:image:width" content="{{ dims[0] }}"/>
+<meta property="og:image:height" content="{{ dims[1] }}"/>
+<meta property="og:site_name" content="{{ site.name }}"/>
+<meta property="og:locale" content="en_US"/>
+<meta property="og:locale:alternate" content="en_GB"/>
+<meta property="og:title" content="{{ page.social_title | default: page.title }}"/>
+<meta property="og:description" content="{{ page.social_description | default: page.description | default: site.description }}"/>
+
+<!-- twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="{{ site.author.twitter }}">
+<meta name="twitter:title" content="{{ page.social_title | default: page.title }}">
+<meta name="twitter:description" content="{{ page.social_description | default: page.description | default: site.description }}"/>
+<meta name="twitter:domain" content="{{ site.url | remove:'http://' | remove:'https://' }}">
+<meta name="twitter:account_id" content="{{ site.author.twitterid }}"/>
+<meta name="twitter:text" content="{{ page.twittertext | default: site.tweet }}" />
+<meta name="twitter:image" content="{{ share_img }}">
+
+<!-- google+ -->
+<meta itemprop="name" content="{{ page.social_title | default: page.title }}">
+<meta itemprop="description" content="{{ page.social_description | default: page.description | default: site.description }}">
+<meta itemprop="image" content="{{ share_img }}">
+<!-- /*** social meta *** -->
+
+<link rel="publisher" href="https://plus.google.com/{{ site.author.googleid }}">
+
+<link rel="icon" type="image/png" href="{{ site.url }}{{ site.favicon }}"/>
+<link rel="canonical" href="{{ site.url }}{{ page.url }}">
+
+<link rel="stylesheet" href="{{ site.pathlead }}css/core.css">

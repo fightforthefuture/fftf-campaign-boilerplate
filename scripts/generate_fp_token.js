@@ -11,9 +11,17 @@
  *        CNAME is the contents of the CNAME file in the root
  *
  */
-var fs    = require('fs'),
-    hash  = require('sha.js');
-var token = process.env.FP_DOMAIN_SECURITY_TOKEN.trim();
+var fs    = require('fs');
+var hash  = require('sha.js');
+var Habitat = require('habitat');
+
+Habitat.load('.env');
+
+var
+  env = new Habitat('', {
+    fp_domain_security_token: 'trolololol'
+  }),
+  token = env.get('fp_domain_security_token').trim();
 
 try {
   var cname = fs.readFileSync('CNAME', 'utf8').trim().toLowerCase();
@@ -23,6 +31,6 @@ try {
 }
 var fpkey = hash('sha256').update(token + cname, 'utf8').digest('hex');
 
-fs.writeFile('dist/freeprogress.txt', fpkey);
+fs.writeFile('public/freeprogress.txt', fpkey);
 
 console.log('Wrote Free Progress domain security token to dist! lol');

@@ -8,31 +8,46 @@
 #############
 
 name: FORMAL CAMPAIGN NAME HERE
-url: CNAME OR GH PAGES URL HERE
 description: FORMAL CAMPAIGN DESCRIPTION HERE
+
+url: CNAME OR GH PAGES URL HERE
+tweet: 'Help keep freedom of expression online a right extended to all people—join forces with @fightforthftr today.'
+favicon: '/favicon.ico'
+pathlead: '/'
+mothership: 'https://mothership-js.herokuapp.com'
+
 timezone: America/New_York
 googleanalytics: UA-26576645-30
 
-pathlead: '' # use this if you need a leading slash or directory on asset paths
-
 author:
-    googleid: 102356128596404327231
-    twitterid: 382376904
-    twitter: fightfortheftr
+  googleid: 102356128596404327231
+  twitterid: 382376904
+  twitter: fightfortheftr
 
-###########
-# Content #
-###########
+#############
+# Authoring #
+#############
 
 future: true
 show_drafts: true
-permalink: /:title/ # See Jekyll documentation for permalink styles
+permalink: /:title/
+
+defaults:
+  - scope:
+      path: ''
+    values:
+      layout: 'default'
 
 #############
 # Compiling #
 #############
 
-exclude: ['img']
-keep_files: ['img', 'js', 'css']
+keep_files: ['images', 'css', 'js']
 
 markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  smart_quotes: ["apos", "apos", "quot", "quot"]
+
+gems: []
