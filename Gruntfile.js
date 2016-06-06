@@ -7,7 +7,8 @@ module.exports = function (grunt) {
   grunt.initConfig({
     site: {
       app: 'app',
-      dist: 'dist'
+      dist: 'dist',
+      scripts: 'scripts'
     },
 
     clean: {
@@ -18,6 +19,12 @@ module.exports = function (grunt) {
             src: '<%= site.dist %>/*'
           }
         ]
+      }
+    },
+
+    execute: {
+      sync_petition_code: {
+        src: ['<%= site.scripts %>/sync_petition_code.js']
       }
     },
 
@@ -152,6 +159,9 @@ module.exports = function (grunt) {
           {
             src: [
               '<%= site.app %>/_js/LICENSE',
+              '<%= site.app %>/_js/lib/util.js',
+              '<%= site.app %>/_js/components/**/*.js',
+              '<%= site.app %>/_js/callbacks/**/*.js',
               '<%= site.app %>/_js/controllers/**/*.js',
               '<%= site.app %>/_js/models/**/*.js',
               '<%= site.app %>/_js/views/**/*.js',
@@ -178,6 +188,9 @@ module.exports = function (grunt) {
     },
 
     concurrent: {
+      external_scripts: [
+        'execute:sync_petition_code'
+      ],
       tasks: [
         'copy:server',
         'less:styles',
@@ -187,6 +200,7 @@ module.exports = function (grunt) {
   });
 
   grunt.registerTask('dev', [
+    'concurrent:external_scripts',
     'clean:files',
     'jekyll:server',
     'concurrent:tasks',

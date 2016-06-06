@@ -12,6 +12,7 @@ url: CNAME OR GH PAGES URL HERE
 description: FORMAL CAMPAIGN DESCRIPTION HERE
 timezone: America/New_York
 googleanalytics: UA-26576645-30
+petitions_api: 'https://info.fightforthefuture.org'
 
 pathlead: '' # use this if you need a leading slash or directory on asset paths
 
