@@ -19,7 +19,8 @@
     "start": "grunt",
     "build": "grunt build",
     "test": "grunt test",
-    "verbose": "grunt build -vvv"
+    "verbose": "grunt build -vvv",
+    "review": "grunt review"
   },
   "dependencies": {
     "autoprefixer": "^6.1.0",

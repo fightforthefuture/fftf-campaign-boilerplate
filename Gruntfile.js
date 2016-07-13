@@ -283,14 +283,6 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('dev', [
-    'clean',
-    'concurrent:server',
-    'postcss:server',
-    'connect:local',
-    'watch'
-  ]);
-
   grunt.registerTask('build', [
     'clean',
     'concurrent:deploy1',
@@ -299,8 +291,14 @@ module.exports = function (grunt) {
 
   grunt.registerTask('review', [
     'clean',
-    'concurrent:review',
+    'concurrent:server',
     'postcss:server'
+  ]);
+
+  grunt.registerTask('dev', [
+    'review',
+    'connect:local',
+    'watch'
   ]);
 
   grunt.registerTask('test', [
