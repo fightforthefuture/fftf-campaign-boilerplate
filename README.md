@@ -53,7 +53,7 @@ Free Progress employs a domain security token mechanism to whitelist new domains
 
 ### Deploying
 
-In order to successfully trigger deploys, you must uncomment deploy instructions in `.travis.yml` and update `access_key_id` & `secret_access_key`. To encrypt `secret_access_key`, run `travis encrypt SECRET_ACCESS_KEY_HERE`.
+In order to successfully trigger deploys, you must uncomment deploy instructions in `.travis.yml`. Update `access_key_id` & `secret_access_key` with credentials from AWS IAM. To encrypt `secret_access_key`, run `travis encrypt SECRET_ACCESS_KEY_HERE`. Also make sure to update `upload-dir: project-name` with the actual project name.
 
 This boilerplate is set up to make travis auto-deploys the easiest thing ever. To set them up, enable builds at https://travis-ci.org/$USERNAME/$REPO/settings/
 

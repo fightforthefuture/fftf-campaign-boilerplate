@@ -26,6 +26,9 @@ addons:
 branches:
   only:
   - production
+before_deploy:
+- node scripts/generate_fp_token.js
+- scripts/deploy-ghpages.sh
 #deploy:
 #  provider: s3
 #  access_key_id: AKIA1234567890ABCDEF
